@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link rel="manifest" href="manifest.json">
+
+    <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <style type="text/css">
+.row{
+  padding: 0px;
+}
+.row .col-25 .button {
+  margin: 0px;
+}
+    </style>
+  </head>
+  <body ng-app="starter">
+
+    <ion-pane  style="background-color:black">
+      <div class="bar bar-header bar-assertive">
+        <h1 class="title">Calculator</h1>
+      </div>
+     
+       <div class="content has-header" style="";>
+        <center>
+        <form name="calc" >
+          <input name="display" readonly placeholder = "0" style="background:black;border:none;width:100%;color:white; height:190px; text-align:right;font-size:2.5em;font-size:calc(100% -1em);border-radius:0px;margin:0px;padding-right:10px"/>
+          <br>
+          <div class="row">
+            <div class="col-25">
+          <input type="button" class="button button-block" value="C" onclick="btnclear()" style="height:80px;font-size:1.5em; border-radius:0px; border-color:black;background-color:black;color:white;"/>
+        </div> 
+          <div class="col-25">
+          <button type="button" class="button button-block icon ion-arrow-left-c"  onclick="backspace()" style="height:80px;font-size:1.5em; border-radius:0px; border-color:black;background-color:black;color:white;"></button>
+          </div> 
+          <div class="col-25">
+          <input type="button" class="button button-block" value="%" onclick="btnmodu()" style=" height:80px;font-size:1.5em; border-radius:0px; border-color:black;background-color:black;color:white;"/>
+          </div> 
+           <div class="col-25">
+           <input type="button" class="button button-block" value="/" onclick="btndiv()" style=" height:80px;font-size:1.5em; border-radius:0px; border-color:black;background-color:#ff4500;color:white;"/>
+           </div> 
+         </div>
+          <div class="row">
+            <div class="col-25">
+          <input type="button" value="7" class="button button-block" onclick="document.calc.display.value +='7'" style=" height:80px;font-size:1.5em; border-radius:0px; border-color:black;background-color:black;color:white;"/>
+        </div>
+          <div class="col-25">
+          <input type="button" value="8" class="button button-block" onclick="document.calc.display.value +='8'" style="height:80px; font-size:1.5em; border-radius:0px; border-color:black;background-color:black;color:white;"/>
+          </div>
+            <div class="col-25">
+          <input type="button" value="9" class="button button-block" onclick="document.calc.display.value +='9'" style="height:80px; font-size:1.5em; border-radius:0px; border-color:black;background-color:black;color:white;"/>
+            </div>
+            <div class="col-25">
+          <input type="button" value="X" class="button button-block" onclick="btnmult()" style="height:80px;font-size:1.5em; border-radius:0px; border-color:black;background-color:#ff4500;color:white;"/>
+          </div>
+        </div>
+          <div class="row">
+            <div class="col-25">
+           <input type="button" value="4" onclick="document.calc.display.value +='4'" class="button button-block" style="height:80px;font-size:1.5em; border-radius:0px; border-color:black;background-color:black;color:white;"/>
+         </div>
+          <div class="col-25">
+          <input type="button" value="5" onclick="document.calc.display.value +='5'" class="button button-block" style="height:80px;font-size:1.5em; border-radius:0px; border-color:black;background-color:black;color:white;"/>
+          </div>
+           <div class="col-25">
+          <input type="button" value="6" onclick="document.calc.display.value +='6'" class="button button-block" style="height:80px;font-size:1.5em; border-radius:0px; border-color:black;background-color:black;color:white;"/>
+          </div>
+           <div class="col-25">
+          <input type="button" value="-" onclick="btnsub()" class="button button-block" style="height:80px;font-size:1.5em; border-radius:0px; border-color:black;background-color:#ff4500;color:white;"/>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+           <input type="button" value="1" onclick="document.calc.display.value +='1'" class="button button-block" style="height:80px;font-size:1.5em; border-radius:0px; border-color:black;background-color:black;color:white;"/>
+          </div>
+          <div class="col-25">
+          <input type="button" value="2" onclick="document.calc.display.value +='2'" class="button button-block" style="height:80px;font-size:1.5em; border-radius:0px; border-color:black;background-color:black;color:white;"/>
+         </div>
+         <div class="col-25">
+          <input type="button" value="3" onclick="document.calc.display.value +='3'" class="button button-block" style="height:80px;font-size:1.5em; border-radius:0px; border-color:black;background-color:black;color:white;"/>
+          </div>
+          <div class="col-25">
+          <input type="button" value="+" onclick="btnplus()" class="button button-block" style="height:80px;font-size:1.5em; border-radius:0px; border-color:black;background-color:#ff4500;color:white;"/>
+        </div>
+      </div>
+          <div class="row">
+            <div class="col-25">  
+          <input type="button" value="00" onclick="document.calc.display.value +='00'" class="button button-block" style="height:80px;font-size:1.5em; border-radius:0px; border-color:black;background-color:black;color:white;"/>
+          </div>
+          <div class="col-25">
+          <input type="button" value="0" onclick="document.calc.display.value +='0'" class="button button-block" style="height:80px;font-size:1.5em; border-radius:0px; border-color:black;background-color:black;color:white;"/>
+          </div>
+          <div class="col-25">  
+          <input type="button" value="." onclick="btndot()" class="button button-block" style="height:80px;font-size:1.5em; border-radius:0px; border-color:black;background-color:black;color:white;"/>
+           </div>
+           <div class="col-25">           
+           <input type="button" value="=" onclick="btnequal()" class="button button-block" style="height:80px;font-size:1.5em; border-radius:0px; border-color:black;background-color:red;color:white;"/>
+       </div>
+     </div>
+       </form>
+     </center>
+     </div>
+   
+    </ion-pane>
+    <script type="text/javascript">
+function btnequal() {
+  if(document.calc.display.placeholder === 'Error'){
+    document.calc.display.placeholder = '';
+  }
+  try{
+    //alert('');
+  document.calc.display.value=eval(document.calc.display.value);
+  }
+  catch(err){
+      document.calc.display.value = null;
+      document.calc.display.placeholder = 'Error';
+  }
+  document.calc.display.style.textAlign="right";
+
+}
+function btnplus() {
+  document.calc.display.value+="+";
+  document.calc.display.style.textAlign="right";
+}
+function btnsub() {
+  document.calc.display.value+="-";
+  document.calc.display.style.textAlign="right";
+}
+function btnmult() {
+  document.calc.display.value+="*";
+  document.calc.display.style.textAlign="right";
+}
+
+function btnmodu() { 
+  document.calc.display.value+="%";
+  document.calc.display.style.textAlign="right";
+}
+function btndiv() {
+  document.calc.display.value+="/";
+  document.calc.display.style.textAlign="right";
+}
+function btndot() {
+  document.calc.display.value+=".";
+  document.calc.display.style.textAlign="right";
+}
+function btnclear() {
+  document.calc.display.value ="";
+  document.calc.display.style.textAlign="right";
+}
+function backspace() {
+ document.calc.display.value = document.calc.display.value.slice(0,-1);
+}
+    </script>
+  </body>
+</html>
